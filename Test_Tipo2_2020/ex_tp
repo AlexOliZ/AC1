@@ -1,0 +1,27 @@
+	.data # 0x10010000
+ X1: 	.asciiz "TSTEX2-2021" #
+ X2: 	.space 26 #
+ X3: 	.byte 0xFF #
+ 	.text # 0x00400000
+ 	.globl main #
+ 	
+main: 	
+	li $t8,0
+	ori $t0,$0,0x39 #
+ 	la $t4,X1 #
+ 	la $t5,X2 #
+ 	move $t6,$t5 #
+ L1: 	bge $t4,$t5,L3 #
+ 	lb $a0,0($t4) #
+ 	bgt $a0,$t0,L2 #
+ 	sb $a0,0($t6) #
+ 	addiu $t6,$t6,1 #
+ L2: 	addiu $t4,$t4,1 #
+ 	addi $t8,$t8,1
+ 	j L1 #
+ L3:	
+ 	lw $v0,0($t5) #
+ 	move $a0,$t8
+ 	li $v0,1
+ 	syscall
+ 	jr $ra #

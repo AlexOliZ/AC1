@@ -1,0 +1,36 @@
+	.data
+newLine:	.asciiz "\n Integer:"
+printResult: 	.asciiz "\n Result"
+	.text
+	.globl main
+main:	
+	
+	#Print newLine
+	li $v0,4
+	la $a0,newLine
+	syscall
+	
+	#read Integer
+	li $v0,5
+	syscall
+	#passar para a variavel
+	or $t0,$v0,$0
+	
+	
+	#contas
+	ori $t2,$0,8
+	add $t1,$t0,$t0
+	sub $t1,$t1,$t2
+	
+	#Print ResultLine
+	or $a0,$t1,$0
+	li $v0,1
+	syscall
+	
+	#print Integer
+	li $v0,4
+	la $a0,printResult
+	syscall
+	
+	
+	jr $ra
